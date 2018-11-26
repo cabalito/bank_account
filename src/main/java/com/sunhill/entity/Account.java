@@ -10,7 +10,6 @@ import lombok.ToString;
 @ToString
 public class Account {
 
-
     protected long id;
     protected long owner;
     protected double balance;
@@ -28,7 +27,5 @@ public class Account {
     public double removeFromBalance(double amount){
         return getBalance() - amount;
     }
-
-
 
 }
