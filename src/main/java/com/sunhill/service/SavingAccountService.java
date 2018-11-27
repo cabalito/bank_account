@@ -18,15 +18,6 @@ public class SavingAccountService extends AccountService<SavingAccount> {
         super(new AccountRepository<>(), SavingAccount.class);
     }
 
-/*    public long createAccount(AccountFactory accountFactory) throws IllegalValueException {
-        if(accountFactory==null
-                || accountFactory.getBalance()<0)throw new IllegalValueException();
-        SavingAccount account = new SavingAccount(
-                accountFactory.getOwner(), accountFactory.getBalance(), accountFactory.getInterestRate());
-
-        return repository.insert(account);
-    }*/
-
     public synchronized double calculateInterest(long accountId) throws IllegalValueException, NotFoundException {
         SavingAccount account = repository.findById(accountId);
 

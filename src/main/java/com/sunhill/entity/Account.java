@@ -20,12 +20,14 @@ public class Account {
         this.balance = balance;
     }
 
-    public double addBalance(double amount){
-        return getBalance() + amount;
+    public synchronized double addBalance(double amount){
+        balance += amount;
+        return balance;
     }
 
-    public double removeFromBalance(double amount){
-        return getBalance() - amount;
+    public synchronized double removeFromBalance(double amount){
+        balance -= amount;
+        return balance;
     }
 
 }

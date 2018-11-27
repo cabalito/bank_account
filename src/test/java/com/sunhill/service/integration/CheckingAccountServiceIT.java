@@ -1,10 +1,11 @@
-package com.sunhill.service;
+package com.sunhill.service.integration;
 
 import com.sunhill.entity.AccountFactory;
 import com.sunhill.exception.IllegalValueException;
 import com.sunhill.exception.LimitExeceededException;
 import com.sunhill.exception.NotFoundException;
 import com.sunhill.exception.UnsuportedAccountTypeException;
+import com.sunhill.service.CheckingAccountService;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -56,16 +57,22 @@ public class CheckingAccountServiceIT {
         checkingAccountService.withdraw(accountId, amount);
     }
 
-    /*@Test
-    public void shouldTransfer() throws IllegalValueException {
+    @Test
+    public void shouldTransfer() throws IllegalValueException, UnsuportedAccountTypeException, NotFoundException {
         double amount = 50.0;
-        Long userId = 25L;
-//        Mockito.when(checkingAccount.getBalance()).thenReturn(10.0);
+        Long destinationAccountId = createDestinationAccount();
 
-        double newBalance = checkingAccountService.transfer(amount, userId);
+        double newBalance = checkingAccountService.transfer(accountId, destinationAccountId, amount);
 
-        assertEquals(checkingAccountService.getBalance() - amount, newBalance);
-    }*/
+        assertEquals(INITIAL_BALANCE - amount, newBalance);
+    }
+
+    private Long createDestinationAccount() throws IllegalValueException, UnsuportedAccountTypeException {
+        return checkingAccountService
+                .createAccount(
+                        new AccountFactory.Builder(USER_ID, INITIAL_BALANCE)
+                .limitOverdraft(LIMIT_OVERDRAFT).build());
+    }
 
 
     @Test

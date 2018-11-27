@@ -60,5 +60,8 @@ public abstract class AccountService<A extends Account> {
     }
 
 
-
+    public double getBalance(Long accountId) throws NotFoundException {
+        Account account = repository.findById(accountId);
+        return account.getBalance();
+    }
 }

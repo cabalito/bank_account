@@ -19,7 +19,7 @@ public class CheckingAccountService extends AccountService<CheckingAccount> {
     }
 
     @Override
-    public double withdraw(long accountId, double amount) throws IllegalValueException, NotFoundException {
+    public synchronized double withdraw(long accountId, double amount) throws IllegalValueException, NotFoundException {
         if(amount<0) throw new IllegalValueException();
         CheckingAccount account = repository.findById(accountId);
 
@@ -27,5 +27,16 @@ public class CheckingAccountService extends AccountService<CheckingAccount> {
     }
 
 
+    public synchronized double transfer(Long originAccounId, long destinationAccounId, double amount)
+            throws NotFoundException, IllegalValueException{
 
+        double originAccountBalance = withdraw(originAccounId, amount);
+        try {
+            deposit(destinationAccounId, amount);
+        } catch (IllegalValueException | NotFoundException e) {
+            //try to do rollback //TODO:Needs improve it
+            deposit(originAccounId, amount);
+        }
+        return originAccountBalance;
+    }
 }
