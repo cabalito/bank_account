@@ -1,9 +1,9 @@
 package com.sunhill.exception;
 
 
-public class UnsuportedAccountTypeException extends Exception{
+public class UnsuportedAccountTypeException extends Exception {
 
-    public UnsuportedAccountTypeException(){
+    public UnsuportedAccountTypeException() {
         super("Account class to instance not found");
     }
 }

@@ -14,13 +14,13 @@ import lombok.ToString;
 @ToString
 public class CheckingAccountService extends AccountService<CheckingAccount> {
 
-    public CheckingAccountService(){
+    public CheckingAccountService() {
         super(new AccountRepository<>(), CheckingAccount.class);
     }
 
     @Override
     public synchronized double withdraw(long accountId, double amount) throws IllegalValueException, NotFoundException {
-        if(amount<0) throw new IllegalValueException();
+        if (amount < 0) throw new IllegalValueException();
         CheckingAccount account = repository.findById(accountId);
 
         return withdraw(account, amount, account.getLimitOverdraft());
@@ -28,7 +28,7 @@ public class CheckingAccountService extends AccountService<CheckingAccount> {
 
 
     public synchronized double transfer(Long originAccounId, long destinationAccounId, double amount)
-            throws NotFoundException, IllegalValueException{
+            throws NotFoundException, IllegalValueException {
 
         double originAccountBalance = withdraw(originAccounId, amount);
         try {

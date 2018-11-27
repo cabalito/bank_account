@@ -13,14 +13,14 @@ public class AccountRepository<A extends Account> {
     HashMap<Long, A> accounts = new HashMap<>();
     long index = 0;
 
-    public long insert(A account){
+    public long insert(A account) {
         accounts.put(++index, account);
         return index;
     }
 
     public A findById(long id) throws NotFoundException {
-         A account = accounts.get(id);
-        if(account==null) throw new NotFoundException();
+        A account = accounts.get(id);
+        if (account == null) throw new NotFoundException();
         return account;
     }
 

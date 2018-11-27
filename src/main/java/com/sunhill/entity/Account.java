@@ -15,17 +15,17 @@ public class Account {
     protected double balance;
 
 
-    public Account(long owner, double balance){
+    public Account(long owner, double balance) {
         this.owner = owner;
         this.balance = balance;
     }
 
-    public synchronized double addBalance(double amount){
+    public synchronized double addBalance(double amount) {
         balance += amount;
         return balance;
     }
 
-    public synchronized double removeFromBalance(double amount){
+    public synchronized double removeFromBalance(double amount) {
         balance -= amount;
         return balance;
     }

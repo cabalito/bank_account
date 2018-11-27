@@ -14,7 +14,7 @@ import lombok.ToString;
 @ToString
 public class SavingAccountService extends AccountService<SavingAccount> {
 
-    public SavingAccountService(){
+    public SavingAccountService() {
         super(new AccountRepository<>(), SavingAccount.class);
     }
 
@@ -22,14 +22,14 @@ public class SavingAccountService extends AccountService<SavingAccount> {
         SavingAccount account = repository.findById(accountId);
 
         double payment = account.getBalance() * account.getInterestRate();
-        if(payment<0) throw new IllegalValueException();
+        if (payment < 0) throw new IllegalValueException();
         return payment;
     }
 
 
     public synchronized double payInterest(long accountId) throws IllegalValueException, NotFoundException {
         double interest = calculateInterest(accountId);
-        return deposit(accountId,interest) ;
+        return deposit(accountId, interest);
     }
 
 

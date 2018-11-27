@@ -1,9 +1,9 @@
 package com.sunhill.exception;
 
 
-public class IllegalValueException extends Exception{
+public class IllegalValueException extends Exception {
 
-    public IllegalValueException(){
+    public IllegalValueException() {
         this("");
     }
 

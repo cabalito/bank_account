@@ -12,8 +12,8 @@ public class SavingAccount extends Account {
 
     protected double interestRate;
 
-    public SavingAccount(long owner, double balance, double interestRate){
-        super(owner,balance);
+    public SavingAccount(long owner, double balance, double interestRate) {
+        super(owner, balance);
         this.interestRate = interestRate;
     }
 

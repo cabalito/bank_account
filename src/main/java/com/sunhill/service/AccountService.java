@@ -16,7 +16,7 @@ public abstract class AccountService<A extends Account> {
 
     protected AccountRepository<A> repository;
 
-    public AccountService(AccountRepository<A> repository, Class<A> accountClass){
+    public AccountService(AccountRepository<A> repository, Class<A> accountClass) {
         this.accountType = accountClass;
         this.repository = repository;
     }
@@ -24,10 +24,10 @@ public abstract class AccountService<A extends Account> {
 
     public long createAccount(AccountFactory accountFactory)
             throws IllegalValueException, UnsuportedAccountTypeException {
-            if(accountFactory==null
-                || accountFactory.getBalance()<0) throw new IllegalValueException();
+        if (accountFactory == null
+                || accountFactory.getBalance() < 0) throw new IllegalValueException();
         @SuppressWarnings("unchecked")
-        A account = (A)accountFactory.createEntity(accountType);
+        A account = (A) accountFactory.createEntity(accountType);
 
         return repository.insert(account);
     }
@@ -35,14 +35,14 @@ public abstract class AccountService<A extends Account> {
     public synchronized double deposit(long accountId, double increment)
             throws IllegalValueException, NotFoundException {
 
-        if(increment<0) throw new IllegalValueException();
+        if (increment < 0) throw new IllegalValueException();
         Account account = repository.findById(accountId);
 
         return account.addBalance(increment);
     }
 
-    public  synchronized double withdraw(long accountId, double amount) throws IllegalValueException, NotFoundException {
-        if(amount<0) throw new IllegalValueException();
+    public synchronized double withdraw(long accountId, double amount) throws IllegalValueException, NotFoundException {
+        if (amount < 0) throw new IllegalValueException();
         Account account = repository.findById(accountId);
 
         double DEFAULT_LIMIT_OVERDRAFT = 0;
@@ -51,8 +51,8 @@ public abstract class AccountService<A extends Account> {
 
     protected synchronized double withdraw(Account account, double amount, double allowedOverdraft) throws LimitExeceededException, NotFoundException {
 
-        double result =  account.removeFromBalance(amount) ;
-        if(result<allowedOverdraft){
+        double result = account.removeFromBalance(amount);
+        if (result < allowedOverdraft) {
             account.addBalance(amount);
             throw new LimitExeceededException();
         }

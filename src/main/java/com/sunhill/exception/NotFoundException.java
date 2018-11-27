@@ -1,9 +1,9 @@
 package com.sunhill.exception;
 
 
-public class NotFoundException extends Exception{
+public class NotFoundException extends Exception {
 
-    public NotFoundException(){
+    public NotFoundException() {
         super("Element does not exists");
     }
 }

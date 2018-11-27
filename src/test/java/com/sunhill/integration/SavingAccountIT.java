@@ -1,4 +1,4 @@
-package com.sunhill.service.integration;
+package com.sunhill.integration;
 
 import com.sunhill.entity.AccountFactory;
 import com.sunhill.exception.IllegalValueException;
@@ -13,7 +13,7 @@ import org.mockito.MockitoAnnotations;
 import static junit.framework.Assert.assertEquals;
 
 
-public class SavingAccountServiceIT {
+public class SavingAccountIT {
 
     private final double INTEREST_RATE = 0.03;
     private final double INITIAL_BALANCE = 1000.0;

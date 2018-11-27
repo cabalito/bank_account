@@ -1,16 +1,13 @@
-package com.sunhill.service.concurrency.concurrency;
+package com.sunhill.concurrency;
 
 import com.sunhill.entity.AccountFactory;
 import com.sunhill.exception.IllegalValueException;
-import com.sunhill.exception.LimitExeceededException;
 import com.sunhill.exception.NotFoundException;
 import com.sunhill.exception.UnsuportedAccountTypeException;
 import com.sunhill.service.CheckingAccountService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import static junit.framework.Assert.assertEquals;
 
 
 public class TransferCheckingAccountConcurrenceTest {
@@ -64,17 +61,17 @@ public class TransferCheckingAccountConcurrenceTest {
 
         public void run() {
 
-                try {
-                    checkingAccountService.transfer(originId, destinationId, amount);
-                } catch (NotFoundException | IllegalValueException e) {
-                    Assert.fail();
-                }
+            try {
+                checkingAccountService.transfer(originId, destinationId, amount);
+            } catch (NotFoundException | IllegalValueException e) {
+                Assert.fail();
+            }
 
-                try {
-                    Thread.sleep(7);
-                } catch (InterruptedException e) {
-                    Assert.fail();
-                }
+            try {
+                Thread.sleep(7);
+            } catch (InterruptedException e) {
+                Assert.fail();
+            }
 
         }
     }

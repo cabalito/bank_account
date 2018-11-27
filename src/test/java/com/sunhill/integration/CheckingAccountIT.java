@@ -1,4 +1,4 @@
-package com.sunhill.service.integration;
+package com.sunhill.integration;
 
 import com.sunhill.entity.AccountFactory;
 import com.sunhill.exception.IllegalValueException;
@@ -12,7 +12,7 @@ import org.junit.Test;
 import static junit.framework.Assert.assertEquals;
 
 
-public class CheckingAccountServiceIT {
+public class CheckingAccountIT {
 
     private final double LIMIT_OVERDRAFT = -700;
     private final double INITIAL_BALANCE = 1000.0;
@@ -29,6 +29,7 @@ public class CheckingAccountServiceIT {
 
         accountId = checkingAccountService.createAccount(factory);
     }
+
     @Test
     public void shouldWithdraw() throws IllegalValueException, NotFoundException {
         double amount = 5.0;
@@ -71,7 +72,7 @@ public class CheckingAccountServiceIT {
         return checkingAccountService
                 .createAccount(
                         new AccountFactory.Builder(USER_ID, INITIAL_BALANCE)
-                .limitOverdraft(LIMIT_OVERDRAFT).build());
+                                .limitOverdraft(LIMIT_OVERDRAFT).build());
     }
 
 
